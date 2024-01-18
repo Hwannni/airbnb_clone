@@ -1,9 +1,8 @@
 [tool.poetry]
-name = "airbnb"
+name = "airbnb-clone-backend"
 version = "0.1.0"
 description = ""
 authors = ["Hwannni <cmhcms1115@naver.com>"]
-license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
