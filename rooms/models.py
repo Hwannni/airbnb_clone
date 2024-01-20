@@ -4,7 +4,7 @@ from common.models import CommonModel
 # Create your models here.
 
 
-class Romm(CommonModel):
+class Room(CommonModel):
 
     """Room Model Definition"""
 
@@ -13,6 +13,10 @@ class Romm(CommonModel):
         PRIVATE_ROOM = ("private_room", "Private Room")
         SHARED_ROOM = "shared_room", "Shared Room"
 
+    name = models.CharField(
+        max_length=180,
+        default="",
+    )
     country = models.CharField(
         max_length=50,
         default="한국",
@@ -43,6 +47,10 @@ class Romm(CommonModel):
         "rooms.Amenity",
     )
 
+    def __str__(self) -> str:
+        return self.name
+
+
 class Amenity(CommonModel):
 
     """Amenity Definition"""
@@ -53,4 +61,11 @@ class Amenity(CommonModel):
     description = models.CharField(
         max_length=150,
         null=True,
+        blank=True,
     )
+
+    def __str__(self) -> str:
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Amenities"
