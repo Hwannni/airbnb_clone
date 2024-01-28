@@ -26,6 +26,28 @@ class WordFilter(admin.SimpleListFilter):
             reviews
 
 
+class ScoreFilter(admin.SimpleListFilter):
+    title = "Filter by Score!"
+    parameter_name = "score"
+
+    def lookups(self, request, model_admin):
+        return [
+            ("bad", "Bad!"),
+            ("good", "Good!"),
+        ]
+
+    def queryset(self, request, reviews):
+        score = self.value()
+        if score == "bad":
+            # lt -> 해당 값보다 작은 값을 선택
+            return reviews.filter(rating__lt=3)
+        elif score == "good":
+            # gte -> 해당 값보다 크거나 같은 값을 선택
+            return reviews.filter(rating__gte=3)
+        else:
+            return reviews
+
+
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = (
@@ -33,6 +55,7 @@ class ReviewAdmin(admin.ModelAdmin):
         "payload",
     )
     list_filter = (
+        ScoreFilter,
         WordFilter,
         "rating",
         # Foreign Key 관계로 필터 만들기
