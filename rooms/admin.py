@@ -25,7 +25,7 @@ class RoomAdmin(admin.ModelAdmin):
         "total_amenities",
         "rating",
         "owner",
-        "created_at",
+        #"created_at",
     )
 
     list_filter = (
